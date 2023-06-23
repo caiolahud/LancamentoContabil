@@ -1,5 +1,4 @@
 ﻿using LancamentoContabil.Data;
-using LancamentoContabil.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -55,7 +54,7 @@ namespace LancamentoContabil.Repository
             return _dbSet.Find(Id);
         }
 
-        public IQueryable<T> RecuperarTodos()
+        public IQueryable <T> RecuperarTodos()
         {
             return _dbSet;
         }

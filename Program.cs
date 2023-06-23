@@ -1,5 +1,6 @@
 ﻿using LancamentoContabil.Data;
 using LancamentoContabil.Model;
+using LancamentoContabil.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace LancamentoContabil
 {
     public class Program
     {
+        private static ILancamentoRepository _lancamentoRepository;
         public static void Main()
         {
             InserirDados();
@@ -49,10 +51,8 @@ namespace LancamentoContabil
 
             int id = 1; // Número de ID a ser consultado
 
-            var lancamento1 = context.LancamentoContabil
-                .Include(p => p.ContasContabeis)
-                .FirstOrDefault(p => p.Id == id);
-                            
+            _lancamentoRepository.ExcluirLancamento(1);
+                       
 
 
         }

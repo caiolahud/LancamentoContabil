@@ -1,5 +1,4 @@
-﻿using LancamentoContabil.Interface;
-using LancamentoContabil.Model;
+﻿using LancamentoContabil.Model;
 using LancamentoContabil.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

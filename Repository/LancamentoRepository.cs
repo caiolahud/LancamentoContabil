@@ -1,6 +1,6 @@
 ﻿using LancamentoContabil.Data;
-using LancamentoContabil.Interface;
 using LancamentoContabil.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +17,43 @@ namespace LancamentoContabil.Repository
             _context= context;
         }
 
-        public IQueryable<Lancamento> RecuperarLacamentoEhContacontabil(Lancamento lancamento)
+        public void ExcluirLancamento(int Id)
         {
-            throw new NotImplementedException();
+            /*Esse método será responsável por excluir o lancamento junto com a conta contábil. 
+            A conta contábil está relacionada com o lancamento, portanto o delete cascade deve ser feito pelo lancamento incluindo a conta.
+            Adicionado o método SingleOrDefault após a consulta para garantir que apenas um único objeto Lancamento seja retornado*/
+
+            var lancamentoComContacontabil = _context.LancamentoContabil
+                .Where(p => p.Id == Id)
+                .Include(p => p.ContasContabeis)
+                .SingleOrDefault();
+
+            if (lancamentoComContacontabil != null)
+            {
+                _context.Remove(lancamentoComContacontabil);
+                _context.SaveChanges();
+            }
+
+
         }
 
-        public IQueryable<Lancamento> RecuperarLancamento(Lancamento lancamento)
+        public Lancamento RecuperarLacamentoComContacontabil(int Id)
         {
-            throw new NotImplementedException();
+            var lancamentoComContacontabil = _context.LancamentoContabil
+                 .Where(p => p.Id == Id)
+                 .Include(p => p.ContasContabeis)
+                 .FirstOrDefault();
+
+            return lancamentoComContacontabil;
+        }
+
+        public Lancamento RecuperarLancamento(int Id)
+        {
+            var lancamento = _context.LancamentoContabil
+                .Where(p => p.Id == Id)
+                .SingleOrDefault();
+            
+            return lancamento;
         }
     }
 }

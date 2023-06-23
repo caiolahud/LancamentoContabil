@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LancamentoContabil.Interface
+namespace LancamentoContabil.Repository
 {
     public interface ILancamentoRepository : IRepositoryBase<Lancamento>
     {
-        IQueryable<Lancamento> RecuperarLancamento(Lancamento lancamento);
-        IQueryable<Lancamento> RecuperarLacamentoEhContacontabil(Lancamento lancamento);
+        Lancamento RecuperarLancamento(int Id);
+        Lancamento RecuperarLacamentoComContacontabil(int Id);
+
+        void ExcluirLancamento(int Id);
     }
 }
